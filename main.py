@@ -5,9 +5,9 @@ ARQUIVO_JSON = "chamados.json"
 
 
 def carregar_chamados():
-    if os.path.exists(ARQUIVO_JSON):  
-        with open(ARQUIVO_JSON, "r") as file:
-            return json.load(file)
+    if os.path.exists(ARQUIVO_JSON):  # ve se o caminho (path) exist
+        with open(ARQUIVO_JSON, "r") as file: # vai ler o arquivo, ou seja abre em modo de leitura o arquivo
+            return json.load(file) # le oar arquivo e transforma em um objeto de pythom
     return []
 
 def salvar_chamados(chamados):
@@ -34,7 +34,7 @@ def buscar_chamado():
 def remover_chamado(): 
     chamados = carregar_chamados()
     id_remover = int(input("Digite o ID do chamado a remover: "))
-    chamados = [c for c in chamados if c["id"] != id_remover]
+    chamados = [c for c in chamados if c["id"] != id_remover] # vai excluir o chamado com o id escolhido, e vai criar uma nova(ja sem o excluido)
     salvar_chamados(chamados)
     print("chamado salvo com sucesso")
 
@@ -48,7 +48,7 @@ def estatisticas():
     chamados = carregar_chamados()
     print(f"Total de chamados: {len(chamados)}")
     if chamados:
-        media_prioridade = sum(c["prioridade"] for c in chamados) / len(chamados)
+        media_prioridade = sum(c["prioridade"] for c in chamados) / len(chamados) # vai calcular a média das prioridades
         print(f"Prioridade média: {media_prioridade:.2f}")
 
 def limpar_lista():
@@ -57,3 +57,33 @@ def limpar_lista():
     if opcao == "C":
         salvar_chamados([])
         print("Lista de chamados apagada.")
+
+def menu():  #menu princincipal onde cada uma delas executa uma função referente a opção...
+    while True:
+        print("\n[1] Cadastrar chamado")
+        print("[2] buscar chamado")
+        print("[3] remover chamado")
+        print("[4] listar chamados")
+        print("[5] estatísticas")
+        print("[6] limpar a lista toda")
+        print("[0] sair")
+        opcao = input("Eescolha uma opção: ")
+        if opcao == "1":
+            cadastrar_chamado()
+        elif opcao == "2":
+            buscar_chamado()
+        elif opcao == "3":
+            remover_chamado()
+        elif opcao == "4":
+            listar_chamados()
+        elif opcao == "5":
+            estatisticas()
+        elif opcao == "6":
+            limpar_lista()
+        elif opcao == "0":
+            break
+        else:
+            print("opção inválida.")
+
+menu()
+
