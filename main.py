@@ -28,7 +28,7 @@ def buscar_chamado():
     chamados = carregar_chamados()
     termo = input("Digite o ID ou termo da descrição: ")
     for chamado in chamados:
-        if str(chamado["id"]) == termo or termo.lower() in chamado["descrição"].lower():
+        if str(chamado["id"]) == termo or termo.lower() in chamado["descrição"].lower(): #verifica se o ID do chamado é igual ao termo ou se o termo, o o lower coloca  todas como minusculas
             print(chamado)
 
 def remover_chamado(): 
@@ -40,7 +40,7 @@ def remover_chamado():
 
 def listar_chamados():
     chamados = carregar_chamados()
-    chamados.sort(key=lambda x: x["prioridade"], reverse=True)
+    chamados.sort(key=lambda x: x["prioridade"], reverse=True) #ordena a lista chamados em ordem decrescente ligada com a chave ali(prioriade)
     for chamado in chamados:
         print(chamado)
 
@@ -50,3 +50,10 @@ def estatisticas():
     if chamados:
         media_prioridade = sum(c["prioridade"] for c in chamados) / len(chamados)
         print(f"Prioridade média: {media_prioridade:.2f}")
+
+def limpar_lista():
+    chamados = carregar_chamados()
+    opcao = input("Confirme com c para limpar a lista: ").upper() # método UPPER ele deixa as letras maiusculas
+    if opcao == "C":
+        salvar_chamados([])
+        print("Lista de chamados apagada.")
