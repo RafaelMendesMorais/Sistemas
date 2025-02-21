@@ -23,3 +23,10 @@ def cadastrar_chamado():
     chamados.append(chamado) 
     salvar_chamados(chamados)
     print("Chamado cadastrado com sucesso!")
+
+def buscar_chamado():
+    chamados = carregar_chamados()
+    termo = input("Digite o ID ou termo da descrição: ")
+    for chamado in chamados:
+        if str(chamado["id"]) == termo or termo.lower() in chamado["descrição"].lower():
+            print(chamado)
