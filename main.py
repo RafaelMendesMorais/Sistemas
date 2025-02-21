@@ -30,3 +30,11 @@ def buscar_chamado():
     for chamado in chamados:
         if str(chamado["id"]) == termo or termo.lower() in chamado["descrição"].lower():
             print(chamado)
+
+def remover_chamado(): 
+    chamados = carregar_chamados()
+    id_remover = int(input("Digite o ID do chamado a remover: "))
+    chamados = [c for c in chamados if c["id"] != id_remover]
+    salvar_chamados(chamados)
+    print("chamado salvo com sucesso")
+    
