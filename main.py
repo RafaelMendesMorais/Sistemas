@@ -37,4 +37,16 @@ def remover_chamado():
     chamados = [c for c in chamados if c["id"] != id_remover]
     salvar_chamados(chamados)
     print("chamado salvo com sucesso")
-    
+
+def listar_chamados():
+    chamados = carregar_chamados()
+    chamados.sort(key=lambda x: x["prioridade"], reverse=True)
+    for chamado in chamados:
+        print(chamado)
+
+def estatisticas():
+    chamados = carregar_chamados()
+    print(f"Total de chamados: {len(chamados)}")
+    if chamados:
+        media_prioridade = sum(c["prioridade"] for c in chamados) / len(chamados)
+        print(f"Prioridade média: {media_prioridade:.2f}")
